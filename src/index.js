@@ -1,4 +1,9 @@
 // =======================================
+// function sayHello() {
+//   console.log('Hello');
+// }
+
+// =======================================
 // get sum
 // const numbers = [10, 11, 12]; // 3
 
@@ -165,10 +170,17 @@
 // =======================================
 // [ 1, 3, 6, 10, 15 ]
 // [-2,-3,-3,-2]
-const getSums = items =>
-  items.reduce((acc, item, idx) => {
-    return idx === 0 ? [item] : [...acc, acc[idx - 1] + item];
-  }, []);
+// const getSums = items =>
+//   items.reduce((acc, item, idx) => {
+//     return idx === 0 ? [item] : [...acc, acc[idx - 1] + item];
+//   }, []);
 
-console.log(getSums([1, 2, 3, 4, 5]));
-console.log(getSums([-2, -1, 0, 1]));
+// console.log(getSums([1, 2, 3, 4, 5]));
+// console.log(getSums([-2, -1, 0, 1]));
+
+// =======================================
+// sayHello();
+
+// import users from './users.js';
+
+// console.log(users);
