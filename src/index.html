@@ -4,9 +4,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Group 24</title>
+
+    <style>
+      .counter {
+        display: flex;
+      }
+
+      .counter p {
+        padding: 0 10px;
+      }
+
+      .modal-wrapper {
+        background-color: rgba(100, 100, 100, 0.8);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+
+        display: none;
+      }
+
+      .show {
+        display: flex;
+      }
+
+      .modal {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      .yellow {
+        width: 200px;
+        height: 200px;
+        background-color: yellow;
+      }
+      .red {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
   </head>
   <body>
-    <h1>JS Group 24</h1>
+    <h1>Module 07 - Events</h1>
+
+    <!-- <div class="counter">
+      <button class="btn decrement">-</button>
+      <p class="value">0</p>
+      <button class="btn increment">+</button>
+    </div>
+
+    <button id="my-button">Press me</button>
+    <input type="text" id="input" /> -->
+
+    <form>
+      <label>
+        <span>Login</span>
+        <input type="text" autocomplete="off" name="login" />
+      </label>
+      <br />
+      <label>
+        <span>Password</span>
+        <input type="password" autocomplete="off" name="password" />
+      </label>
+      <br />
+      <button type="submit">Send</button>
+    </form>
+
+    <input type="text" id="myInput" />
+
+    <div class="yellow">
+      <div class="red"></div>
+    </div>
+
+    <div class="modal-wrapper">
+      <div class="modal">
+        <h2>Invalid login or password!</h2>
+        <button>Close</button>
+      </div>
+    </div>
+
+    <!-- <a href="/">home</a> -->
 
     <script src="./index.js" type="module"></script>
   </body>
