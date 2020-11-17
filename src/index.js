@@ -1,4 +1,18 @@
+import werstdfh from './file.js';
+
+console.log(werstdfh);
+
+// const ref = {
+//   buttonDecrement: document.querySelector('.decrement'),
+//   buttonIncrement: document.querySelector('.increment'),
+//   htmlValue: document.querySelector('.value'),
+// };
+
 // let value = 0;
+
+// function render() {
+//   ref.htmlValue.textContent = value;
+// }
 
 // function decremenet() {
 //   value -= 1;
@@ -12,26 +26,16 @@
 //   render();
 // }
 
-// function render() {
-//   ref.htmlValue.textContent = value;
-// }
+// console.log('value:', value);
+// incremenet();
+// incremenet();
+// incremenet();
+// incremenet();
+// console.log('value:', value);
 
-// // console.log('value:', value);
-// // incremenet();
-// // incremenet();
-// // incremenet();
-// // incremenet();
-// // console.log('value:', value);
-
-// // const buttonIncrement = document.querySelector('.decrement');
-// // const buttonDecrement = document.querySelector('.increment');
-// // const htmlValue = document.querySelector('.value');
-
-// const ref = {
-//   buttonDecrement: document.querySelector('.decrement'),
-//   buttonIncrement: document.querySelector('.increment'),
-//   htmlValue: document.querySelector('.value'),
-// };
+// const buttonIncrement = document.querySelector('.decrement');
+// const buttonDecrement = document.querySelector('.increment');
+// const htmlValue = document.querySelector('.value');
 
 // ref.buttonDecrement.addEventListener('click', decremenet);
 // ref.buttonIncrement.addEventListener('click', incremenet);
@@ -142,12 +146,12 @@
 // window.addEventListener('unload', () => console.log('unload'));
 
 // ======= current target =======
-const outer = document.querySelector('.yellow');
+// const outer = document.querySelector('.yellow');
 
-function handleOuter(e) {
-  console.log('parent (currentTarget):', e.currentTarget);
-  console.log('child (target):', e.target);
-  console.log('e:', e); // ??? currentTarget = null ???
-}
+// function handleOuter(e) {
+//   console.log('parent (currentTarget):', e.currentTarget);
+//   console.log('child (target):', e.target);
+//   console.log('e:', e); // ??? currentTarget = null ???
+// }
 
-outer.addEventListener('click', handleOuter);
+// outer.addEventListener('click', handleOuter);
