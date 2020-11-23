@@ -4,23 +4,30 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "json-server --watch server/db.json",
+    "build": "babel src -d dist",
+    "start": "node src/index.js",
+    "hgfre": "node src/myProgram.js",
+    "calc": "open -a calculator",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-import": "^2.20.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GregorHorvatH/js-group-24.git"
   },
+  "keywords": [],
+  "author": "Geri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GregorHorvatH/js-group-24/issues"
+  },
+  "homepage": "https://github.com/GregorHorvatH/js-group-24#readme",
   "dependencies": {
-    "json-server": "^0.16.1"
-  }
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.7",
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7"
+  },
+  "peerDependencies": {}
 }
