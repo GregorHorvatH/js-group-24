@@ -58,7 +58,9 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
-    "uuid4": "^2.0.2",
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "uuidv4": "^6.2.5"
   }
 }

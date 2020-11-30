@@ -1,26 +1,23 @@
-import { uuid } from 'uuidv4';
-import './styles.css';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import dog from './images/dog.jpeg';
+// ========== timer ==========
+// import Timer from './timer';
 
-console.log(uuid());
+// const timer = new Timer({ selector: '#timer' });
 
-// ======== functions ========
-const sayHello = () => {
-  console.log('Hello');
-};
+// timer.start();
 
-const sum = (a, b) => {
-  console.log(a + b);
-};
+// new Timer({
+//   selector: '#timer2',
+//   value: 200,
+// });
+// new Timer({
+//   selector: '#timer3',
+//   value: 100,
+// });
 
-// ======== run ========
-sayHello();
-sum(20, 9);
+// ========== todos ==========
+import Todos from './todos';
 
-const img = document.querySelector('img');
-const button = document.querySelector('button');
-
-button.addEventListener('click', () => {
-  img.src = dog;
-});
+new Todos({ selector: '#todos' });

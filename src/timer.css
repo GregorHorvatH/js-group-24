@@ -1,0 +1,11 @@
+.timer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 36px;
+  width: 400px;
+}
+
+.btn {
+  min-width: 150px;
+}
