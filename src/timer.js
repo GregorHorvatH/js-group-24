@@ -1,4 +1,24 @@
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 import './timer.css';
+
+toastr.options = {
+  closeButton: false,
+  debug: false,
+  newestOnTop: true,
+  progressBar: true,
+  positionClass: 'toast-top-right',
+  preventDuplicates: false,
+  onclick: null,
+  showDuration: '300',
+  hideDuration: '1000',
+  timeOut: '2000',
+  extendedTimeOut: '1000',
+  showEasing: 'swing',
+  hideEasing: 'linear',
+  showMethod: 'fadeIn',
+  hideMethod: 'fadeOut',
+};
 
 const template = (value) => `
 <div class="timer card">
@@ -54,6 +74,8 @@ class Timer {
     // меняем аттрибуты чтобы пользователь понимал какая кнопка доступна
     this.refs.stopButton.removeAttribute('disabled');
     this.refs.startButton.setAttribute('disabled', true);
+
+    toastr.success('The timer is started!');
   }
 
   /**
@@ -71,6 +93,8 @@ class Timer {
     // меняем аттрибуты чтобы пользователь понимал какая кнопка доступна
     this.refs.startButton.removeAttribute('disabled');
     this.refs.stopButton.setAttribute('disabled', true);
+
+    toastr.error('The timer is stopped!');
   }
 }
 

@@ -2,9 +2,9 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // ========== timer ==========
-// import Timer from './timer';
+import Timer from './timer';
 
-// const timer = new Timer({ selector: '#timer' });
+const timer = new Timer({ selector: '#timer' });
 
 // timer.start();
 
@@ -18,6 +18,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // });
 
 // ========== todos ==========
-import Todos from './todos';
+// import Todos from './todos';
 
-new Todos({ selector: '#todos' });
+// new Todos({ selector: '#todos' });
