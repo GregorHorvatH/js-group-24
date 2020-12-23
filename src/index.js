@@ -1,28 +1,14 @@
 import toastr from 'toastr';
-import { addTodo, deleteTodo, toggleTodo, fetchTodos } from './todosApi';
+// import { addTodo, deleteTodo, toggleTodo, fetchTodos } from './todosApi';
+import { getTodos, addTodo, deleteTodo } from './api';
 import todoItemTemplate from './todoItem.hbs';
+import options from './toastr.options';
+
 import 'toastr/build/toastr.min.css';
 import './styles.scss';
 
-toastr.options = {
-  closeButton: true,
-  debug: false,
-  newestOnTop: false,
-  progressBar: true,
-  positionClass: 'toast-bottom-right',
-  preventDuplicates: false,
-  onclick: null,
-  showDuration: '300',
-  hideDuration: '1000',
-  timeOut: '5000',
-  extendedTimeOut: '1000',
-  showEasing: 'swing',
-  hideEasing: 'linear',
-  showMethod: 'fadeIn',
-  hideMethod: 'fadeOut',
-};
-
 let todos = [];
+toastr.options = options;
 
 // ===== refs =====
 const refs = {
@@ -95,18 +81,31 @@ const loadTodos = () => {
   hideList();
   showLoader();
 
-  fetchTodos()
+  getTodos()
     .then(data => {
       todos = data;
+      renderList();
     })
-    .then(renderList)
     .then(() => toastr.success('Todo loaded successfully!'))
-    .catch(error => toastr.error(error))
+    .catch(error => toastr.error(error.messaage))
     .finally(() => {
       hideLoader();
       showList();
       enableForm();
     });
+
+  // fetchTodos()
+  //   .then(data => {
+  //     todos = data;
+  //   })
+  //   .then(renderList)
+  //   .then(() => toastr.success('Todo loaded successfully!'))
+  //   .catch(error => toastr.error(error))
+  //   .finally(() => {
+  //     hideLoader();
+  //     showList();
+  //     enableForm();
+  //   });
 };
 
 /**
@@ -125,15 +124,30 @@ const handleSubmit = e => {
 
   disableForm();
 
-  addTodo(text)
+  const newTodo = {
+    text: text,
+    isDone: false,
+  };
+
+  addTodo(newTodo)
     .then(todo => todos.push(todo))
     .then(() => {
       target.value = '';
     })
     .then(renderList)
     .then(() => toastr.success('Todo added successfully!'))
-    .catch(error => toastr.error(error))
+    .catch(error => toastr.error(error.message))
     .finally(enableForm);
+
+  // addTodo(text)
+  //   .then(todo => todos.push(todo))
+  //   .then(() => {
+  //     target.value = '';
+  //   })
+  //   .then(renderList)
+  //   .then(() => toastr.success('Todo added successfully!'))
+  //   .catch(error => toastr.error(error))
+  //   .finally(enableForm);
 };
 
 /**
@@ -141,12 +155,32 @@ const handleSubmit = e => {
  * @param {number} id
  */
 const handleDeleteTodo = id => {
+  showLoader();
+
   deleteTodo(id)
     .then(() => {
       todos = todos.filter(todo => todo.id !== id);
+      renderList();
     })
-    .then(renderList)
-    .then(() => toastr.success('Todo deleted successfully!'));
+    .then(() => toastr.success('Todo deleted successfully!'))
+    .catch(error => toastr.error(error.message))
+    .finally(() => {
+      hideLoader();
+    });
+};
+
+const handleToggleTodo = id => {
+  todos = todos.map(todo => {
+    return todo.id === id
+      ? {
+          ...todo,
+          isDone: !todo.isDone,
+        }
+      : todo;
+  });
+
+  // toggleTodo(id);
+  renderList();
 };
 
 /**
@@ -167,7 +201,7 @@ const handleTodoClick = e => {
       break;
 
     case 'INPUT':
-      toggleTodo(id);
+      handleToggleTodo(Number(id));
       break;
 
     default:
@@ -179,5 +213,5 @@ const handleTodoClick = e => {
 refs.inputForm.addEventListener('submit', handleSubmit);
 refs.todoList.addEventListener('click', handleTodoClick);
 
-// ===== run =====
+// ===== start =====
 loadTodos();

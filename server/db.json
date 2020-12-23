@@ -1,23 +1,18 @@
 {
   "todos": [
     {
-      "text": "Cold Pursuit",
-      "isDone": false,
-      "id": 1
-    },
-    {
-      "text": "sdf",
+      "text": "sgdsgsg",
       "isDone": false,
       "id": 2
     },
     {
-      "text": "купить хлеб",
-      "isDone": true,
+      "text": "tiesto elements",
+      "isDone": false,
       "id": 3
     },
     {
-      "text": "puy4567",
-      "isDone": true,
+      "text": "купить молоко",
+      "isDone": false,
       "id": 4
     }
   ]
