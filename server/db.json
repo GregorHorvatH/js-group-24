@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "text": "Cold Pursuit",
+      "isDone": false,
+      "id": 1
+    },
+    {
+      "text": "sdf",
+      "isDone": false,
+      "id": 2
+    },
+    {
+      "text": "купить хлеб",
+      "isDone": true,
+      "id": 3
+    },
+    {
+      "text": "puy4567",
+      "isDone": true,
+      "id": 4
+    }
+  ]
+}
