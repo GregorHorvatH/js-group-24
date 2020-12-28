@@ -1,4 +1,4 @@
-import { login, logout, getContacts, addContact } from './api';
+import { login, logout, getContacts, addContact, deleteContact } from './api';
 import './style.css';
 
 const refs = {
@@ -22,7 +22,7 @@ const render = () => {
   const items = contacts
     .map(
       ({ id, name, number }) =>
-        `<li data-id=${id}>${name}: ${number} <button class="delete">x</button></li>`,
+        `<li>${name}: ${number} <button class="delete" data-id=${id}>x</button></li>`,
     )
     .join('');
 
@@ -87,6 +87,22 @@ const handleSubmit = e => {
     .finally(hideLoader);
 };
 
+const handleDelete = e => {
+  const { id } = e.target.dataset;
+
+  if (id) {
+    showLoader();
+
+    deleteContact(id)
+      .then(() => {
+        contacts = contacts.filter(item => item.id !== id);
+      })
+      .then(render)
+      .finally(hideLoader);
+  }
+};
+
 refs.login.addEventListener('click', handleLogin);
 refs.logout.addEventListener('click', handleLogout);
 refs.form.addEventListener('submit', handleSubmit);
+refs.list.addEventListener('click', handleDelete);
