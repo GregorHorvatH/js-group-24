@@ -34,6 +34,10 @@ app.post('/todo', (req, res) => {
 });
 
 app.get('/todo', (req, res) => {
+  res.set({
+    'Access-Control-Allow-Origin': '*',
+  });
+
   res.json(todos);
 });
 
