@@ -1,217 +1,92 @@
-import toastr from 'toastr';
-// import { addTodo, deleteTodo, toggleTodo, fetchTodos } from './todosApi';
-import { getTodos, addTodo, deleteTodo } from './api';
-import todoItemTemplate from './todoItem.hbs';
-import options from './toastr.options';
+import { login, logout, getContacts, addContact } from './api';
+import './style.css';
 
-import 'toastr/build/toastr.min.css';
-import './styles.scss';
-
-let todos = [];
-toastr.options = options;
-
-// ===== refs =====
 const refs = {
-  inputForm: document.querySelector('.input-form'),
-  todoList: document.querySelector('.todo-list'),
   loader: document.querySelector('.loader'),
+  login: document.querySelector('.login'),
+  logout: document.querySelector('.logout'),
+  content: document.querySelector('.content'),
+  form: document.querySelector('.form'),
+  userInfo: document.querySelector('.user-info'),
+  name: document.querySelector('.name'),
+  email: document.querySelector('.email'),
+  list: document.querySelector('.list'),
 };
 
-// ===== functions =====
-/**
- * Render the todo list to DOM
- */
-const renderList = () => {
-  refs.todoList.innerHTML = '';
-  refs.todoList.insertAdjacentHTML(
-    'beforeend',
-    todos.map(todoItemTemplate).join(''),
-  );
+let contacts = [];
+
+const showLoader = () => refs.loader.classList.add('show');
+const hideLoader = () => refs.loader.classList.remove('show');
+
+const render = () => {
+  const items = contacts
+    .map(
+      ({ id, name, number }) =>
+        `<li data-id=${id}>${name}: ${number} <button class="delete">x</button></li>`,
+    )
+    .join('');
+
+  refs.list.innerHTML = '';
+  refs.list.insertAdjacentHTML('beforeend', items);
 };
 
-/**
- * Show loader
- */
-const showLoader = () => {
-  refs.loader.classList.add('show');
-};
-
-/**
- * Hide loader
- */
-const hideLoader = () => {
-  refs.loader.classList.remove('show');
-};
-
-/**
- * Show the todo List
- */
-const showList = () => {
-  refs.todoList.classList.add('show');
-};
-
-/**
- * Hide the todo List
- */
-const hideList = () => {
-  refs.todoList.classList.remove('show');
-};
-
-/**
- * Disable the input form
- */
-const disableForm = () => {
-  refs.inputForm.querySelector('.input').setAttribute('disabled', true);
-  refs.inputForm.querySelector('.button').setAttribute('disabled', true);
-};
-
-/**
- * Enable the input form
- */
-const enableForm = () => {
-  refs.inputForm.querySelector('.input').removeAttribute('disabled');
-  refs.inputForm.querySelector('.button').removeAttribute('disabled');
-};
-
-/**
- * Fetch todos from the server and load them to the DOM
- */
-const loadTodos = () => {
-  disableForm();
-  hideList();
-  showLoader();
-
-  getTodos()
-    .then(data => {
-      todos = data;
-      renderList();
-    })
-    .then(() => toastr.success('Todo loaded successfully!'))
-    .catch(error => toastr.error(error.messaage))
-    .finally(() => {
-      hideLoader();
-      showList();
-      enableForm();
-    });
-
-  // fetchTodos()
-  //   .then(data => {
-  //     todos = data;
-  //   })
-  //   .then(renderList)
-  //   .then(() => toastr.success('Todo loaded successfully!'))
-  //   .catch(error => toastr.error(error))
-  //   .finally(() => {
-  //     hideLoader();
-  //     showList();
-  //     enableForm();
-  //   });
-};
-
-/**
- * Add new todo to the list and save to the server
- * @param {object} event
- */
-const handleSubmit = e => {
-  const target = e.target.elements.text;
-  const text = target.value;
-
-  e.preventDefault();
-
-  if (!text) {
-    return;
-  }
-
-  disableForm();
-
-  const newTodo = {
-    text: text,
-    isDone: false,
+const handleLogin = () => {
+  const userData = {
+    email: 'test.user@mail.com',
+    password: '1234567',
   };
 
-  addTodo(newTodo)
-    .then(todo => todos.push(todo))
-    .then(() => {
-      target.value = '';
-    })
-    .then(renderList)
-    .then(() => toastr.success('Todo added successfully!'))
-    .catch(error => toastr.error(error.message))
-    .finally(enableForm);
-
-  // addTodo(text)
-  //   .then(todo => todos.push(todo))
-  //   .then(() => {
-  //     target.value = '';
-  //   })
-  //   .then(renderList)
-  //   .then(() => toastr.success('Todo added successfully!'))
-  //   .catch(error => toastr.error(error))
-  //   .finally(enableForm);
-};
-
-/**
- * Delete todo from the list and from the server
- * @param {number} id
- */
-const handleDeleteTodo = id => {
   showLoader();
 
-  deleteTodo(id)
-    .then(() => {
-      todos = todos.filter(todo => todo.id !== id);
-      renderList();
+  login(userData)
+    .then(({ user }) => {
+      refs.name.textContent = user.name;
+      refs.email.textContent = user.email;
+
+      refs.login.classList.remove('show');
+      refs.logout.classList.add('show');
+      refs.content.classList.add('show');
     })
-    .then(() => toastr.success('Todo deleted successfully!'))
-    .catch(error => toastr.error(error.message))
-    .finally(() => {
-      hideLoader();
-    });
+    .then(getContacts)
+    .then(data => (contacts = data))
+    .then(render)
+    .finally(hideLoader);
 };
 
-const handleToggleTodo = id => {
-  todos = todos.map(todo => {
-    return todo.id === id
-      ? {
-          ...todo,
-          isDone: !todo.isDone,
-        }
-      : todo;
-  });
+const handleLogout = () => {
+  showLoader();
 
-  // toggleTodo(id);
-  renderList();
+  logout()
+    .then(() => {
+      refs.name.textContent = '';
+      refs.email.textContent = '';
+
+      refs.content.classList.remove('show');
+      refs.logout.classList.remove('show');
+      refs.login.classList.add('show');
+    })
+    .finally(hideLoader);
 };
 
-/**
- * Select action (delete or toggle) when user click on todo item button or checkbox
- * @param {object} event
- */
-const handleTodoClick = e => {
-  if (e.target === e.currentTarget) {
-    return;
-  }
+const handleSubmit = e => {
+  const { name, number } = e.target.elements;
+  const newContact = { name: name.value, number: number.value };
 
-  const parent = e.target.closest('.todo-item');
-  const { id } = parent.dataset;
+  e.preventDefault();
+  showLoader();
 
-  switch (e.target.nodeName) {
-    case 'BUTTON':
-      handleDeleteTodo(Number(id));
-      break;
-
-    case 'INPUT':
-      handleToggleTodo(Number(id));
-      break;
-
-    default:
-      break;
-  }
+  addContact(newContact)
+    .then(contact => {
+      contacts.push(contact);
+    })
+    .then(render)
+    .then(() => {
+      name.value = '';
+      number.value = '';
+    })
+    .finally(hideLoader);
 };
 
-// ===== event listeners =====
-refs.inputForm.addEventListener('submit', handleSubmit);
-refs.todoList.addEventListener('click', handleTodoClick);
-
-// ===== start =====
-loadTodos();
+refs.login.addEventListener('click', handleLogin);
+refs.logout.addEventListener('click', handleLogout);
+refs.form.addEventListener('submit', handleSubmit);

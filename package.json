@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --env.mode development",
-    "server": "json-server --watch server/db.json --delay 500",
     "build": "webpack --env.mode production",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -43,7 +42,6 @@
   "dependencies": {
     "axios": "^0.19.2",
     "handlebars": "^4.1.2",
-    "json-server": "^0.16.1",
     "toastr": "^2.1.4"
   }
 }

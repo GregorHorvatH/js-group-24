@@ -3,21 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Module 12 - Todos</title>
+    <title>CRUD</title>
   </head>
   <body>
-    <h1>Module 12 - Todos</h1>
+    <h2>Phonebook</h2>
 
-    <div class="todos">
-      <h2 class="title">Todos</h2>
-      <form class="input-form">
-        <input class="input" type="text" name="text" /><button class="button">
-          + Add
-        </button>
+    <nav>
+      <div class="user-info">
+        <span class="name"></span>
+        <span class="email"></span>
+      </div>
+
+      <button class="login show">Login</button>
+      <button class="logout">Logout</button>
+    </nav>
+
+    <content class="content">
+      <form class="form">
+        <label>
+          <span>name</span>
+          <input type="text" name="name" />
+        </label>
+        <label>
+          <span>number</span>
+          <input type="tel" name="number" />
+        </label>
+        <button type="submit">Add</button>
       </form>
 
-      <h3 class="loader">Loading...</h3>
-      <ul class="todo-list"></ul>
+      <ul class="list"></ul>
+    </content>
+
+    <div class="loader">
+      <p>Loading...</p>
     </div>
   </body>
 </html>

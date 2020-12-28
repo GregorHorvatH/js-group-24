@@ -47,8 +47,8 @@ module.exports = env =>
       },
       plugins: [
         new CleanWebpackPlugin(),
-        new FriendlyErrorsWebpackPlugin(),
-        new WebpackBar(),
+        // new FriendlyErrorsWebpackPlugin(),
+        // new WebpackBar(),
       ],
     },
     loadModeConfig(env),

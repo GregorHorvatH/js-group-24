@@ -1,46 +1,19 @@
-// ======== fetch ========
-// const URL = 'http://localhost:3000';
+export const login = userData =>
+  Promise.resolve({
+    user: { name: 'Test User', email: 'test.user@mail.com' },
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmVhMDY0Y2I4ZmY0ODAwMTdhNWRiMjYiLCJpYXQiOjE2MDkxNzU4Nzh9.ufolexUx_gmDMl7-xnAcN5QReRmOHeJnfHjgGfUzFi0',
+  });
 
-// export const getTodos = () => fetch(`${URL}/todos`).then(res => res.json());
+export const logout = () => Promise.resolve();
 
-// export const addTodo = newTodo =>
-//   fetch(`${URL}/todos`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(newTodo),
-//   }).then(res => res.json());
+export const getContacts = () =>
+  Promise.resolve([
+    {
+      id: 1,
+      name: 'Bobby',
+      number: '12345',
+    },
+  ]);
 
-// export const deleteTodo = id =>
-//   fetch(`${URL}/todos/${id}`, {
-//     method: 'DELETE',
-//   });
-
-// ======== axios ========
-// import axios from 'axios';
-
-// axios.defaults.baseURL = 'http://localhost:3000';
-
-// export const getTodos = () => axios.get('/todos').then(res => res.data);
-
-// export const addTodo = newTodo =>
-//   axios.post('/todos', newTodo).then(({ data }) => data);
-
-// export const deleteTodo = id => axios.delete(`/todos/${id}`);
-
-// ======== axios instance ========
-import axios from 'axios';
-
-// server 1
-const server1 = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: { Authorization: 'super-puper-secret-key' },
-});
-
-export const getTodos = () => server1.get('/todos').then(res => res.data);
-
-export const addTodo = newTodo =>
-  server1.post('/todos', newTodo).then(({ data }) => data);
-
-export const deleteTodo = id => server1.delete(`/todos/${id}`);
+export const addContact = payload => Promise.resolve(payload);
