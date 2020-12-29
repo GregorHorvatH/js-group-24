@@ -35,3 +35,7 @@ nav {
 .show {
   display: block;
 }
+
+.cart {
+  cursor: pointer;
+}
