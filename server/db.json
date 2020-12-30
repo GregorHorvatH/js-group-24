@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Bobby"
+    },
+    {
+      "id": 2,
+      "name": "Chris"
+    },
+    {
+      "id": 3,
+      "name": "Peter"
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "number": 2600456456,
+      "amount": 100
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "number": 876543456,
+      "amount": 200
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "number": 234198765,
+      "amount": 234
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "number": 345987654,
+      "amount": 555
+    }
+  ]
+}

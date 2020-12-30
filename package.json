@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "json-server --watch server/db.json",
+    "server": "json-server --watch server/db.json --delay 2000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
