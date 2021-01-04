@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font: 13px Helvetica, Arial;
+      }
+      form {
+        background: #000;
+        padding: 3px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      form input {
+        border: 0;
+        padding: 10px;
+        width: 90%;
+        margin-right: 0.5%;
+      }
+      form button {
+        width: 9%;
+        background: rgb(130, 224, 255);
+        border: none;
+        padding: 10px;
+      }
+      #messages {
+        position: absolute;
+        top: 65px;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      #messages li {
+        padding: 5px 10px;
+      }
+      #messages li:nth-child(odd) {
+        background: #eee;
+      }
+      #name {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+      <h3 id="name"></h3>
+      <input id="m" autocomplete="off" name="text" /><button>Send</button>
+    </form>
+
+    <ul id="messages"></ul>
+
+    <script>
+      const refs = {
+        form: document.getElementById('form'),
+        name: document.getElementById('name'),
+        messages: document.getElementById('messages'),
+      };
+      const socket = io();
+      const fullName = `${faker.name.firstName()} ${faker.name.lastName()}`;
+
+      refs.name.textContent = fullName;
+
+      refs.form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const text = e.target.elements.text.value;
+
+        socket.emit('chat message', { fullName, text });
+        e.target.elements.text.value = '';
+      });
+
+      socket.on('chat message', msg => {
+        console.log(msg);
+        refs.messages.insertAdjacentHTML(
+          'afterbegin',
+          `<li>${msg.fullName}: ${msg.text}</li>`,
+        );
+      });
+    </script>
+  </body>
+</html>
