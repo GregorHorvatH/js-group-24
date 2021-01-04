@@ -1,21 +1,39 @@
-### js-group-24
+# node-js-getting-started
 
-# Перед началом работы
+A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-## Настройка Prettier
+This application supports the [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
 
-- установить плагин Prettier в VS Code
-- "editor.formatOnSave": true
+## Running Locally
 
-## Настройка ESLint
+Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
 
-- установить плагин ESLint в VS Code
-- "editor.defaultFormatter": "esbenp.prettier-vscode"
+```sh
+$ git clone https://github.com/heroku/node-js-getting-started.git # or clone your own fork
+$ cd node-js-getting-started
+$ npm install
+$ npm start
+```
 
-## Установка файлов библиотек
+Your app should now be running on [localhost:5000](http://localhost:5000/).
 
-- `npm install`
+## Deploying to Heroku
 
-## Более подробно про настройку Prettier + ESLint + Airbnb можете прочитать здесь
+```
+$ heroku create
+$ git push heroku main
+$ heroku open
+```
+or
 
-[https://blog.echobind.com/integrating-prettier-eslint-airbnb-style-guide-in-vscode-47f07b5d7d6a](https://blog.echobind.com/integrating-prettier-eslint-airbnb-style-guide-in-vscode-47f07b5d7d6a)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+## Documentation
+
+For more information about using Node.js on Heroku, see these Dev Center articles:
+
+- [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
+- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
+- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
+- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
+- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
